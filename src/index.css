@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: 'Roboto Slab', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+h2{
+  @apply text-xl font-bold tracking-widest;
+}
+h1{
+  @apply text-2xl font-bold tracking-widest;
+}
+.bb{
+  @apply border-b-2 border-light;
+}
+.b{
+  @apply border-2 border-light;
+}
+.px{
+  @apply px-4 sm:px-8 md:px-12 lg:px-16;
+}
+.input{
+  @apply border-2 border-light focus:border-primary  bg-light focus:border-opacity-100 w-full  bg-opacity-20  outline-none p-3 md:p-4 text-dark placeholder-dark tracking-wide;
+}
+.button-light{
+  @apply hover:bg-primary border-primary border-2  text-primary hover:text-light tracking-widest  py-3 md:py-4 px-8 md:px-16 max-w-full w-max ;
+}
+
+.button{
+  @apply bg-primary hover:bg-dark text-light tracking-widest  py-3 md:py-4 px-8 md:px-16 max-w-full w-max ;
+}
+.h-max{
+  height: max-content;
+}
