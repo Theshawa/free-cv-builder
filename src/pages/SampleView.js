@@ -19,6 +19,7 @@ function SampleView({ data }) {
                 languages={data.languages}
                 socials={data.socials}
                 portfolio={data.portfolio}
+                theme={data.theme}
             />}
         </div>
     );

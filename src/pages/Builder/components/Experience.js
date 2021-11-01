@@ -37,7 +37,7 @@ const Experience = ({data,save,remove}) => {
     return (
         <div className=" b bg-light bg-opacity-30 flex flex-col w-full">
             <button onClick={()=>setActive(true)} className="p-8 flex items-center justify-between gap-4"><span>{(company.current && company.current.value) || `Experience ${data.id}`}</span> {!active && <span>✏️</span>}</button>
-            <form onSubmit={saveData} className={`${active ? 'flex' : 'hidden'} flex-col gap-8 px-8 pb-8`}>
+            <form onSubmit={saveData} className={`${active ? 'flex' : 'hidden'} flex-col gap-8 px-8 pb-8`} noValidate>
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
                     <input required ref={company} type="text" className="input" placeholder="Company*" />
                     <input required ref={city} type="text" className="input h-max" placeholder="City*" />

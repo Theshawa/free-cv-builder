@@ -38,3 +38,6 @@ h1{
 .h-max{
   height: max-content;
 }
+.bb2{
+  @apply border-b-2;
+}

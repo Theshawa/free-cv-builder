@@ -2,7 +2,7 @@ import Layout from "./components/Layout";
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 import Builder from "./pages/Builder/Builder";
 import SampleView from "./pages/SampleView";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Publish from "./pages/publish";
 import View from "./pages/View";
 import Editor from "./pages/Builder/Edit";
@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 function App() {
   const [builderData, setBuilderData] = useState(false)
   const [title,setTitle] = useState("Free CV Builder | 2021")
+ 
   return (
     <Router>
       <Switch>

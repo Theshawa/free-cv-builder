@@ -10,6 +10,7 @@ import Output from "./components/Output";
 import Portfolio from "./components/Portfolio";
 import Skill from "./components/Skill";
 import Social from "./components/Social";
+import Theme from "./components/Theme";
 
 
 function useQuery() {
@@ -25,6 +26,7 @@ function Editor({ getdata }) {
     const [portfolio, setPortfolio] = useState('')
     const [loading, setLoading] = useState(false)
     const [publishReady, setPublishReady] = useState(false)
+    const [theme, setTheme] = useState({ primary: '#035afc', secondary: '#000a1c', background: '#ffffff' })
     const [authenticated, setAuthenticated] = useState(false)
     const history = useHistory()
     let query = useQuery();
@@ -55,6 +57,7 @@ function Editor({ getdata }) {
                         setBasics(data.basics)
                         setPortfolio(data.portfolio)
                         setSocials(data.socials)
+                        setTheme(data.theme)
                         setAuthenticated(true)
                         setLoading(false)
                     } else {
@@ -88,7 +91,7 @@ function Editor({ getdata }) {
 
     }, [educations, expreiences, languages, basics])
 
-    
+
     const ClearAll = () => {
         setEducations([])
         setExpreiences([])
@@ -96,6 +99,7 @@ function Editor({ getdata }) {
         setlanguages([])
         setSocials([])
         setBasics(false)
+        setTheme({ primary: '#035afc', secondary: '#000a1c', background: '#ffffff' })
         setPortfolio('')
     }
 
@@ -108,16 +112,17 @@ function Editor({ getdata }) {
             languages,
             basics,
             portfolio,
+            theme,
             socials,
-            date:new Date()
+            date: new Date()
         }
         await db.collection('cv').doc(id).update(update)
         setLoading(false)
         history.push(`/view?id=${id}`)
     }
-    const deleteCv = async ()=>{
+    const deleteCv = async () => {
         const res = prompt('Are you sure ? If Yes Type `Delete`')
-        if(res==='Delete'){
+        if (res === 'Delete') {
             setLoading(true)
             await db.collection('cv').doc(id).delete()
             await db.collection('key').doc(id).delete()
@@ -239,6 +244,7 @@ function Editor({ getdata }) {
             {authenticated && <div className="grid-cols-1 lg:grid-cols-2 grid h-full overflow-y-hidden">
                 <div className="h-full overflow-y-auto flex flex-col px gap-32 py-8">
                     <Basic data={basics} save={(data) => setBasics(data)} />
+                    <Theme data={theme} save={(data) => setTheme(data)} />
                     <div className="flex flex-col gap-8">
                         <div className="flex flex-col gap-2">
                             <h1>Education</h1>
@@ -302,19 +308,20 @@ function Editor({ getdata }) {
                     </div>
                 </div>
                 <div className="h-full overflow-y-auto b lg:block hidden bg-white">
-                    <Output educations={educations} basics={basics} expreiences={expreiences} skills={skills} languages={languages} portfolio={portfolio} socials={socials} />
+                    <Output theme={theme} educations={educations} basics={basics} expreiences={expreiences} skills={skills} languages={languages} portfolio={portfolio} socials={socials} />
                 </div>
                 {showRes && <div className="h-screen overflow-y-auto top-0 left-0 b lg:hidden w-screen fixed z-40 bg-white">
-                    <Output educations={educations} basics={basics} expreiences={expreiences} skills={skills} languages={languages} portfolio={portfolio} socials={socials} />
+                    <Output theme={theme} educations={educations} basics={basics} expreiences={expreiences} skills={skills} languages={languages} portfolio={portfolio} socials={socials} />
                 </div>}
                 {publishReady && <div className="flex gap-4 overflow-x-auto px py-8 bg-light">
+                    <button onClick={() => setShowRes(!showRes)} className="w-max button-light z-50 b lg:hidden flex-shrink-0  ">{showRes ? 'Hide' : 'Show'} Preview</button>
                     <button onClick={ClearAll} className="button-light flex-shrink-0">Clear All</button>
                     <button className="button-light flex-shrink-0" onClick={deleteCv}>Delete</button>
                     <button className="button flex-shrink-0" onClick={makePublish}>Publish</button>
                 </div>}
             </div>}
-            
-            {loading && <Loader/>}
+
+            {loading && <Loader />}
             {!authenticated && <form onSubmit={handleAuthenticate} className="flex flex-col px py-16 gap-4 max-w-xl">
                 <input type="password" className="input" ref={key} placeholder="Enter Your Key" />
                 <button className="button">Submit</button>

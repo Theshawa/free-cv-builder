@@ -25,7 +25,7 @@ const Social = ({ data, save, remove }) => {
     return (
         <div className=" b bg-light bg-opacity-30 flex flex-col w-full">
             <button onClick={() => setActive(true)} className="p-8 flex items-center justify-between text-xl gap-4"><span>{(name.current && name.current.value) || `Profile ${data.id}`}</span> {!active && <span>✏️</span>}</button>
-            <form onSubmit={saveData} className={`${active ? 'flex' : 'hidden'} flex-col gap-8 px-8 pb-8`}>
+            <form onSubmit={saveData} className={`${active ? 'flex' : 'hidden'} flex-col gap-8 px-8 pb-8`} noValidate>
                 <div className="flex flex-col gap-8">
                     <input required ref={name} type="text" className="input" placeholder="Name*" />
                     <input required ref={link} type="url" className="input" placeholder="Link*" />

@@ -14,7 +14,7 @@ function Layout({ children,title }) {
                 <title>{title}</title>
             </Helmet>
             <div className="  h-screen flex flex-col text-darker text-base tracking-wide font-medium overflow-hidden">
-                {!location.pathname.includes('view') ? <Header /> : ''}
+                {(!location.pathname.includes('view') && location.pathname!=='/') ? <Header /> : ''}
                 
                 {children}
                 

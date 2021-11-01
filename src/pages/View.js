@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useHistory,useLocation } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 import Loader from "../components/Loader";
 import db from "../firebase.config";
 import Output from "./Builder/components/Output";
@@ -9,7 +9,6 @@ function useQuery() {
 }
 
 function View({makeTitle}) {
-    const history = useHistory()
     const [data, setData] = useState(false)
     const [notFound, setNotFound] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -53,6 +52,7 @@ function View({makeTitle}) {
                 languages={data.languages}
                 socials={data.socials}
                 portfolio={data.portfolio}
+                theme={data.theme}
             />}
             {notFound && <div className="">
                 <div className="text-primary text-opacity-40 px py-16 flex flex-col gap-8">

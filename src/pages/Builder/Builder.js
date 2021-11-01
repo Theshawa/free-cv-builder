@@ -9,6 +9,7 @@ import Output from "./components/Output";
 import Portfolio from "./components/Portfolio";
 import Skill from "./components/Skill";
 import Social from "./components/Social";
+import Theme from "./components/Theme";
 
 
 
@@ -21,6 +22,7 @@ function Builder({ getdata, data, publish }) {
     const [socials, setSocials] = useState([])
     const [portfolio, setPortfolio] = useState('')
     const [publishReady, setPublishReady] = useState(false)
+    const [theme, setTheme] = useState({primary: '#035afc', secondary: '#000a1c', background: '#ffffff'})
     const history = useHistory()
     useEffect(() => {
         if ((basics && basics.name.f && basics.name.l && basics.mobile && basics.email && basics.jobTitle)) {
@@ -40,6 +42,7 @@ function Builder({ getdata, data, publish }) {
             setBasics(data.basics)
             setPortfolio(data.portfolio)
             setSocials(data.socials)
+            setTheme(data.theme)
         }
     }, [])
     const ClearAll = () => {
@@ -48,6 +51,7 @@ function Builder({ getdata, data, publish }) {
         setSkills([])
         setlanguages([])
         setSocials([])
+        setTheme({primary: '#035afc', secondary: '#000a1c', background: '#ffffff'})
         setBasics(false)
         setPortfolio('')
     }
@@ -59,7 +63,8 @@ function Builder({ getdata, data, publish }) {
             languages,
             basics,
             portfolio,
-            socials
+            socials,
+            theme
         })
         history.push('/sample-view')
     }
@@ -72,7 +77,8 @@ function Builder({ getdata, data, publish }) {
             basics,
             portfolio,
             socials,
-            date: new Date()
+            date: new Date(),
+            theme
         })
         history.push('/publish')
     }
@@ -187,6 +193,7 @@ function Builder({ getdata, data, publish }) {
 
             <div className="h-full overflow-y-auto flex flex-col px gap-32 py-8">
                 <Basic data={basics} save={(data) => setBasics(data)} />
+                <Theme data={theme} save={(data) => setTheme(data)}/>
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col gap-2">
                         <h1>Education</h1>
@@ -250,10 +257,10 @@ function Builder({ getdata, data, publish }) {
                 </div>
             </div>
             <div className="h-full overflow-y-auto b lg:block hidden bg-white">
-                <Output educations={educations} basics={basics} expreiences={expreiences} skills={skills} languages={languages} portfolio={portfolio} socials={socials} />
+                <Output educations={educations} basics={basics} expreiences={expreiences} theme={theme} skills={skills} languages={languages} portfolio={portfolio} socials={socials} />
             </div>
             {showRes && <div className="h-screen overflow-y-auto top-0 left-0 b lg:hidden w-screen fixed z-40 bg-white">
-                <Output educations={educations} basics={basics} expreiences={expreiences} skills={skills} languages={languages} portfolio={portfolio} socials={socials} />
+                <Output educations={educations} basics={basics} expreiences={expreiences} theme={theme} skills={skills} languages={languages} portfolio={portfolio} socials={socials} />
             </div>}
             {publishReady && <div className="flex gap-4 overflow-x-auto px py-8 bg-light">
                 <button onClick={() => setShowRes(!showRes)} className="w-max button-light z-50 b lg:hidden flex-shrink-0  ">{showRes ? 'Hide' : 'Show'} Preview</button>
