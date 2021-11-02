@@ -1,5 +1,4 @@
-# 
-FREE CV Builder
+#FREE CV Builder
 by [Theshawa Dasun](https://theshawa.cf/)
 
 This is a platform for build and publish your CV in a easy way without paying money. All you have to do is fill necessary fields, save and publish 😄.
